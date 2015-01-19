@@ -16,6 +16,16 @@
   {% endif %}
 {% endblock %}
 
+{% block package_tags %}
+  {%- if pkg.tags and 'tags' in schema.dataset_fields and
+         'display_snippet' in schema.dataset_fields.tags -%}
+    {% snippet "scheming/snippets/display_field.html",
+      field=schema.dataset_fields.tags, data=pkg %}
+  {%- else -%}
+    {{ super() }}
+  {%- endif -%}
+{% endblock %}
+
 {% block package_additional_info %}
   {% snippet "scheming/package/snippets/additional_info.html",
     pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
